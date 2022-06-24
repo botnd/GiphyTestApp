@@ -21,6 +21,8 @@
 		3AB068912865ED4E0078CA88 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB068902865ED4E0078CA88 /* BaseVC.swift */; };
 		3AB068942865EDA90078CA88 /* NSObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB068932865EDA90078CA88 /* NSObjectExtensions.swift */; };
 		3AB068972865EE280078CA88 /* ClosureTypealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB068962865EE280078CA88 /* ClosureTypealiases.swift */; };
+		3AB0689B2865F31D0078CA88 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0689A2865F31D0078CA88 /* TabBarCoordinator.swift */; };
+		3AB0689D2865F3340078CA88 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0689C2865F3340078CA88 /* TabBarVC.swift */; };
 		BFAA1DB2D99C614E77E5A86D /* Pods_GiphyTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7D268A2369B18BBEE901A /* Pods_GiphyTestApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		3AB068902865ED4E0078CA88 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		3AB068932865EDA90078CA88 /* NSObjectExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectExtensions.swift; sourceTree = "<group>"; };
 		3AB068962865EE280078CA88 /* ClosureTypealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureTypealiases.swift; sourceTree = "<group>"; };
+		3AB0689A2865F31D0078CA88 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		3AB0689C2865F3340078CA88 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		50D7D268A2369B18BBEE901A /* Pods_GiphyTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiphyTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82796A3E8DA12D2A5F274572 /* Pods-GiphyTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphyTestApp.debug.xcconfig"; path = "Target Support Files/Pods-GiphyTestApp/Pods-GiphyTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		B16BD800DE02EA213F689C38 /* Pods-GiphyTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphyTestApp.release.xcconfig"; path = "Target Support Files/Pods-GiphyTestApp/Pods-GiphyTestApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 		3AB0686D2864BF190078CA88 /* GiphyTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				3AB068982865F3040078CA88 /* Flows */,
 				3AB068952865EE170078CA88 /* Utilities */,
 				3AB068922865ED9E0078CA88 /* Extensions */,
 				3AB0688B2865ED1B0078CA88 /* Application */,
@@ -128,6 +133,23 @@
 				3AB068962865EE280078CA88 /* ClosureTypealiases.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3AB068982865F3040078CA88 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				3AB068992865F30D0078CA88 /* TabBarFlow */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		3AB068992865F30D0078CA88 /* TabBarFlow */ = {
+			isa = PBXGroup;
+			children = (
+				3AB0689A2865F31D0078CA88 /* TabBarCoordinator.swift */,
+				3AB0689C2865F3340078CA88 /* TabBarVC.swift */,
+			);
+			path = TabBarFlow;
 			sourceTree = "<group>";
 		};
 		6915B8BF2FD33CA5B1A699D2 /* Frameworks */ = {
@@ -290,9 +312,11 @@
 				3AB068882865EBB00078CA88 /* R.generated.swift in Sources */,
 				3AB068912865ED4E0078CA88 /* BaseVC.swift in Sources */,
 				3AB068712864BF190078CA88 /* SceneDelegate.swift in Sources */,
+				3AB0689B2865F31D0078CA88 /* TabBarCoordinator.swift in Sources */,
 				3AB068942865EDA90078CA88 /* NSObjectExtensions.swift in Sources */,
 				3AB0688F2865ED420078CA88 /* BaseCoordinator.swift in Sources */,
 				3AB068792864BF190078CA88 /* GiphyTestApp.xcdatamodeld in Sources */,
+				3AB0689D2865F3340078CA88 /* TabBarVC.swift in Sources */,
 				3AB0688D2865ED360078CA88 /* ApplicationCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

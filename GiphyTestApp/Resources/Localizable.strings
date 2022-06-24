@@ -5,3 +5,6 @@
   Created by Dmitri Isakov on 24.06.2022.
   
 */
+
+"TabBar.Items.Search" = "Search";
+"TabBar.Items.Saved" = "Saved";
