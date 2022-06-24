@@ -20,6 +20,10 @@ class TabBarCoordinator: BaseCoordinator {
         tabBarView.onFlow = { [weak self] navController, itemType in
             self?.runItemFlow(navController: navController, itemType: itemType)
         }
+        
+        router.setNavigationBarHidden(true, animated: false)
+        router.setViewControllers([tabBarView], animated: false)
+        runItemFlow(navController: tabBarView.viewControllers?.first as? UINavigationController, itemType: .search)
     }
     
     private func runItemFlow(navController: UINavigationController?, itemType: TabBarItemType) {

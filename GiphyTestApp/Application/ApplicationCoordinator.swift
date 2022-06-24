@@ -21,6 +21,13 @@ class ApplicationCoordinator: BaseCoordinator {
     }
     
     private func runMainFlow() {
+        let coordinator = TabBarCoordinator(router: router)
         
+        coordinator.finishFlow = { [weak self, weak coordinator] in
+            self?.removeDependency(coordinator)
+        }
+        
+        addDependency(coordinator)
+        coordinator.start()
     }
 }
