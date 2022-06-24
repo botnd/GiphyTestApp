@@ -8,5 +8,6 @@ target 'GiphyTestApp' do
   # Pods for GiphyTestApp
   pod 'R.swift', '~> 5.0.3'
   pod 'SnapKit', '~> 4.0.0'
+  pod 'Kingfisher', '~> 7.0'
 
 end
