@@ -49,7 +49,7 @@ class TabBarCoordinator: BaseCoordinator {
         var coordinator: Coordinatable!
         switch itemType {
         case .search:
-            coordinator = nil // TODO: set searchCoordinator
+            coordinator = SearchCoordinator(router: navController)
         case .saved:
             coordinator = nil // TODO: set savedCoordinator
         }
