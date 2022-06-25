@@ -10,6 +10,8 @@ class SearchVC: BaseVC {
     
     private var cells: [SearchCellVM] = []
     
+    private lazy var searchView = SearchView()
+    
     private lazy var collectionView: UICollectionView = {
         let fl = UICollectionViewFlowLayout()
         fl.scrollDirection = .vertical
@@ -33,14 +35,22 @@ class SearchVC: BaseVC {
     }
     
     private func setupUI() {
+        view.backgroundColor = .white
+        view.addSubview(searchView)
         view.addSubview(collectionView)
         
         setupConstraints()
     }
     
     private func setupConstraints() {
+        searchView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.equalToSuperview()
+        }
         collectionView.snp.makeConstraints { make in
-            make.leading.top.trailing.bottom
+            make.top.equalTo(searchView.snp_bottom)
+                .offset(5)
+            make.leading.trailing.bottom
                 .equalToSuperview()
         }
     }
@@ -53,6 +63,9 @@ class SearchVC: BaseVC {
                 self?.collectionView.reloadData()
             }
             .store(in: &cancellables)
+        
+        searchView.searchPublisher
+            .assign(to: &viewModel.$searchQuery)
     }
 }
 

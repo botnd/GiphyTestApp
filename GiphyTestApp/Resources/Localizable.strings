@@ -8,3 +8,5 @@
 
 "TabBar.Items.Search" = "Search";
 "TabBar.Items.Saved" = "Saved";
+
+"SearchBar.Placeholder" = "Search for GIFs";
