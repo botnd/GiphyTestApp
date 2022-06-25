@@ -8,6 +8,8 @@
 class SearchVC: BaseVC {
     var viewModel: SearchVM!
     
+    private var cells: [SearchCellVM] = []
+    
     private lazy var collectionView: UICollectionView = {
         let fl = UICollectionViewFlowLayout()
         fl.scrollDirection = .vertical
@@ -18,7 +20,7 @@ class SearchVC: BaseVC {
         v.delegate = self
         v.dataSource = self
         
-        
+        v.register(cellInterface: SearchCell.self)
         
         return v
     }()
@@ -44,22 +46,50 @@ class SearchVC: BaseVC {
     }
     
     private func setupBindings() {
-        
+        viewModel.cellsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] cells in
+                self?.cells = cells
+                self?.collectionView.reloadData()
+            }
+            .store(in: &cancellables)
     }
 }
 
 extension SearchVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        0
+        cells.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        UICollectionViewCell()
+        let cell: SearchCell = collectionView.dequeueReusableCell(for: indexPath)
+        
+        if let cellVM = self.cells[safeIndex: indexPath.row] {
+            cell.configure(with: cellVM)
+        }
+        
+        return cell
     }
 }
 
 extension SearchVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: handle item tap
+    }
+}
+
+extension SearchVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var width: CGFloat = (collectionView.bounds.width / 3) - 10
+        let height: CGFloat
+        
+        if indexPath.row > 0 && (indexPath.row % 4 == 1 || indexPath.row % 4 == 2) {
+            width = (width * 2) + 15
+            height = (width - 15) / 2
+        } else {
+            height = width
+        }
+        
+        return CGSize(width: width, height: height)
     }
 }

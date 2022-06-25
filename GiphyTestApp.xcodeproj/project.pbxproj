@@ -34,6 +34,7 @@
 		3AB068B62867579E0078CA88 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB068B52867579E0078CA88 /* Gif.swift */; };
 		3AB068B8286757DD0078CA88 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB068B7286757DD0078CA88 /* Image.swift */; };
 		3AB068BA2867594C0078CA88 /* GiphyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB068B92867594C0078CA88 /* GiphyResponse.swift */; };
+		3AB068BC2867714E0078CA88 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB068BB2867714E0078CA88 /* ArrayExtensions.swift */; };
 		BFAA1DB2D99C614E77E5A86D /* Pods_GiphyTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7D268A2369B18BBEE901A /* Pods_GiphyTestApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		3AB068B52867579E0078CA88 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		3AB068B7286757DD0078CA88 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		3AB068B92867594C0078CA88 /* GiphyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyResponse.swift; sourceTree = "<group>"; };
+		3AB068BB2867714E0078CA88 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		50D7D268A2369B18BBEE901A /* Pods_GiphyTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiphyTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82796A3E8DA12D2A5F274572 /* Pods-GiphyTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphyTestApp.debug.xcconfig"; path = "Target Support Files/Pods-GiphyTestApp/Pods-GiphyTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		B16BD800DE02EA213F689C38 /* Pods-GiphyTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphyTestApp.release.xcconfig"; path = "Target Support Files/Pods-GiphyTestApp/Pods-GiphyTestApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				3AB068932865EDA90078CA88 /* NSObjectExtensions.swift */,
 				3AB068AF286641EC0078CA88 /* UICollectionViewExtensions.swift */,
+				3AB068BB2867714E0078CA88 /* ArrayExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				3AB068B3286756C20078CA88 /* GiphyAPI.swift in Sources */,
 				3AB068B62867579E0078CA88 /* Gif.swift in Sources */,
 				3AB068AE28663E9B0078CA88 /* CellConfigurable.swift in Sources */,
+				3AB068BC2867714E0078CA88 /* ArrayExtensions.swift in Sources */,
 				3AB0686F2864BF190078CA88 /* AppDelegate.swift in Sources */,
 				3AB068882865EBB00078CA88 /* R.generated.swift in Sources */,
 				3AB068BA2867594C0078CA88 /* GiphyResponse.swift in Sources */,

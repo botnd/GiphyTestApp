@@ -30,7 +30,7 @@ class SearchVM {
     private func loadData() {
         gifsCancellable?.cancel()
         
-        let task = api.loadTrending(offset: offset)
+        let task = api.loadTrending(offset: offset, count: 48)
         
         gifsCancellable = task.compactMap { [weak self] res in
             self?.offset += res.1.count

@@ -5,6 +5,9 @@
 //  Created by Dmitri Isakov on 24.06.2022.
 //
 
+import Kingfisher
+import SnapKit
+
 struct SearchCellVM {
     let gif: Gif
 }
@@ -13,6 +16,8 @@ class SearchCell: UICollectionViewCell, CellInterface {
     private lazy var imageView: UIImageView = {
         let v = UIImageView()
         v.contentMode = .scaleAspectFill
+        v.layer.masksToBounds = true
+        v.clipsToBounds = true
         return v
     }()
     
@@ -50,6 +55,13 @@ extension SearchCell: CellConfigurable {
     typealias VMType = SearchCellVM
     
     func configure(with vm: SearchCellVM) {
-        // TODO: configure image w kingfisher
+        imageView.kf.setImage(
+            with: vm.gif.downsized?.url,
+            placeholder: R.image.placeholder()?.withTintColor(.black, renderingMode: .alwaysTemplate),
+            options: [
+                .cacheOriginalImage,
+                .transition(.fade(1))
+            ]
+        )
     }
 }

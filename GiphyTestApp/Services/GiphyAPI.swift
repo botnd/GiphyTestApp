@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 protocol GiphyAPI {
-    func loadTrending(offset: Int) -> AnyPublisher<([Gif], Pagination), Never>
-    func loadSearch(_ query: String, offset: Int) -> AnyPublisher<([Gif], Pagination), Never>
+    func loadTrending(offset: Int, count: Int) -> AnyPublisher<([Gif], Pagination), Never>
+    func loadSearch(_ query: String, offset: Int, count: Int) -> AnyPublisher<([Gif], Pagination), Never>
 }
 
 class GiphyApiDefaultImpl: GiphyAPI {
@@ -45,14 +45,21 @@ class GiphyApiDefaultImpl: GiphyAPI {
             .eraseToAnyPublisher()
     }
     
-    func loadTrending(offset: Int) -> AnyPublisher<([Gif], Pagination), Never> {
-        let url = buildURL(path: "gifs/trending")!
+    func loadTrending(offset: Int, count: Int = 50) -> AnyPublisher<([Gif], Pagination), Never> {
+        let url = buildURL(path: "gifs/trending", qs: [
+            "offset": String(offset),
+            "limit": String(count)
+        ])!
         
         return fetchGifs(for: url)
     }
     
-    func loadSearch(_ query: String, offset: Int) -> AnyPublisher<([Gif], Pagination), Never> {
-        let url = buildURL(path: "gifs/search", qs: ["q": query])!
+    func loadSearch(_ query: String, offset: Int, count: Int = 50) -> AnyPublisher<([Gif], Pagination), Never> {
+        let url = buildURL(path: "gifs/search", qs: [
+            "q": query,
+            "offset": String(offset),
+            "limit": String(count)
+        ])!
         
         return fetchGifs(for: url)
     }
