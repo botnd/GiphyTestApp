@@ -6,7 +6,7 @@
 //
 
 struct SearchCellVM {
-    
+    let gif: Gif
 }
 
 class SearchCell: UICollectionViewCell, CellInterface {

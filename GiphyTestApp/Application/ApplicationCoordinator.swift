@@ -11,6 +11,7 @@ typealias Router = UINavigationController
 
 class ApplicationCoordinator: BaseCoordinator {
     private let router: Router
+    private let giphyAPI: GiphyAPI = GiphyApiDefaultImpl()
     
     init(router: Router) {
         self.router = router
@@ -21,7 +22,7 @@ class ApplicationCoordinator: BaseCoordinator {
     }
     
     private func runMainFlow() {
-        let coordinator = TabBarCoordinator(router: router)
+        let coordinator = TabBarCoordinator(router: router, giphyAPI: giphyAPI)
         
         coordinator.finishFlow = { [weak self, weak coordinator] in
             self?.removeDependency(coordinator)

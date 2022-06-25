@@ -7,9 +7,11 @@
 
 class SearchCoordinator: BaseCoordinator {
     private let router: Router
+    private let api: GiphyAPI
     
-    init(router: Router) {
+    init(router: Router, api: GiphyAPI) {
         self.router = router
+        self.api = api
     }
     
     override func start() {
@@ -18,7 +20,7 @@ class SearchCoordinator: BaseCoordinator {
     
     private func showSearchModule() {
         let vc = SearchVC()
-        let vm = SearchVM()
+        let vm = SearchVM(api: api)
         
         vc.viewModel = vm
         
