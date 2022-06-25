@@ -87,7 +87,7 @@ extension SearchVC: UICollectionViewDataSource {
 
 extension SearchVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: handle item tap
+        viewModel.tapGif(indexPath.row)
     }
 }
 

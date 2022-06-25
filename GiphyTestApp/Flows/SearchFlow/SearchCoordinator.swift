@@ -21,9 +21,20 @@ class SearchCoordinator: BaseCoordinator {
     private func showSearchModule() {
         let vc = SearchVC()
         let vm = SearchVM(api: api)
-        
+        vm.onGifTapped = { [weak self] gif in
+            self?.showGifViewModule(gif)
+        }
         vc.viewModel = vm
         
         router.setViewControllers([vc], animated: false)
+    }
+    
+    private func showGifViewModule(_ gif: Gif) {
+        let vc = GifViewVC()
+        let vm = GifViewVM(gif: gif)
+        
+        vc.viewModel = vm
+    
+        router.pushViewController(vc, animated: true)
     }
 }

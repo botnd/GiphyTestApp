@@ -12,3 +12,5 @@ typealias BoolAction = (Bool) -> Void
 typealias StringAction = (String?) -> Void
 
 typealias Failure = (Error?) -> Void
+
+typealias GifAction = (Gif) -> Void

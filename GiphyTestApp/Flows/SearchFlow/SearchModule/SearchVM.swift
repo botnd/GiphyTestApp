@@ -6,8 +6,11 @@
 //
 
 import Combine
+import Kingfisher
 
 class SearchVM {
+    
+    var onGifTapped: GifAction?
     
     private let api: GiphyAPI
 
@@ -59,6 +62,12 @@ class SearchVM {
     private func mapCells(_ from: [Gif]) {
         cells = from.map { gif in
             SearchCellVM(gif: gif)
+        }
+    }
+    
+    func tapGif(_ index: Int) {
+        if let gif = cells[safeIndex: index]?.gif {
+            onGifTapped?(gif)
         }
     }
 }
