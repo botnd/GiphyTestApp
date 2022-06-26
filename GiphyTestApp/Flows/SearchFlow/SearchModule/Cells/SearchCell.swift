@@ -15,9 +15,6 @@ struct SearchCellVM {
 }
 
 class SearchCell: UICollectionViewCell, CellInterface {
-    private let saveImage = UIImage(systemName: "arrow.down.circle")
-    private let removeImage = UIImage(systemName: "arrow.down.circle.fill")
-    
     private lazy var imageView: UIImageView = {
         let v = UIImageView()
         v.contentMode = .scaleAspectFill
@@ -26,9 +23,9 @@ class SearchCell: UICollectionViewCell, CellInterface {
         return v
     }()
     
-    private lazy var saveButton: UIButton = {
-        let v = UIButton()
-        v.setImage(saveImage, for: .normal)
+    private lazy var saveButton: SaveButton = {
+        let v = SaveButton()
+        
         return v
     }()
     
@@ -93,8 +90,9 @@ extension SearchCell: CellConfigurable {
         saveCancellable = saveButton
             .publisher(for: .touchUpInside)
             .receive(on: DispatchQueue.main)
-            .sink { _ in
+            .sink { [weak self] _ in
                 vm.onSaveTap?(vm.gif)
+                self?.saveButton.setActive(true)
             }
     }
 }
