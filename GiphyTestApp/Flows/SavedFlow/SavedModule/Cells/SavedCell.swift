@@ -6,6 +6,7 @@
 //
 
 import Kingfisher
+import Combine
 
 struct SavedCellVM {
     let gif: SavedGif
@@ -14,10 +15,18 @@ struct SavedCellVM {
 
 class SavedCell: UITableViewCell, CellInterface {
     
+    private var removeCancellable: AnyCancellable?
+    
     private lazy var gifImageView: UIImageView = {
         let v = UIImageView()
         v.contentMode = .scaleAspectFit
         
+        return v
+    }()
+    
+    private lazy var saveButton: SaveButton = {
+        let v = SaveButton()
+        v.setActive(true)
         return v
     }()
     
@@ -35,6 +44,7 @@ class SavedCell: UITableViewCell, CellInterface {
     
     private func setupUI() {
         contentView.addSubview(gifImageView)
+        contentView.addSubview(saveButton)
         
         setupConstraints()
     }
@@ -50,6 +60,18 @@ class SavedCell: UITableViewCell, CellInterface {
             make.bottom.equalToSuperview()
                 .offset(-5)
         }
+        
+        saveButton.snp.makeConstraints { make in
+            make.width.height.equalTo(30)
+            
+            make.top
+                .equalToSuperview()
+                .offset(10)
+            
+            make.trailing
+                .equalToSuperview()
+                .offset(-10)
+        }
     }
 }
 
@@ -59,5 +81,11 @@ extension SavedCell: CellConfigurable {
     func configure(with vm: SavedCellVM) {
         let provider = LocalFileImageDataProvider(fileURL: vm.gif.pathURL)
         gifImageView.kf.setImage(with: provider, placeholder: R.image.placeholder())
+        
+        removeCancellable = saveButton.publisher(for: .touchUpInside)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                vm.onSavedTap?(vm.gif)
+            }
     }
 }

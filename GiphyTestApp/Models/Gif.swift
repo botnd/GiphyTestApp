@@ -13,6 +13,7 @@ struct Gif {
     let title: String
     let downsized: Image?
     let original: Image?
+    var saved: SavedGif?
 }
 
 extension Gif: Decodable {

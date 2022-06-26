@@ -12,6 +12,7 @@ class SavedVM {
     let filesService: FilesService
     
     private var fetchCancellable: AnyCancellable?
+    private var removeCancellable: AnyCancellable?
     
     @Published
     private var cells: [SavedCellVM] = []
@@ -37,10 +38,20 @@ class SavedVM {
     
     private func mapCells(_ gifs: [SavedGif]) {
         self.cells = gifs.map {
-            SavedCellVM(gif: $0) { gif in
-                print(gif)
+            SavedCellVM(gif: $0) { [weak self] gif in
+                self?.removeGif(gif)
             }
         }
+    }
+    
+    private func removeGif(_ gif: SavedGif) {
+        guard let gifId = gif.gifId else {return}
+        removeCancellable = coreDataStore.publisher(delete: gif)
+            .replaceError(with: false)
+            .flatMap { [unowned self] _ in self.filesService.removeImage(id: gifId) }
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: DispatchQueue.main)
+            .sink { _ in }
     }
     
     func getVM(for index: Int) -> SavedCellVM? {

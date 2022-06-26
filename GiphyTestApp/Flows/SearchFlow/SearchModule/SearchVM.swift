@@ -83,27 +83,41 @@ class SearchVM {
     
     private func updateCells(_ saved: [SavedGif]) {
         cells.forEach { cell in
-            cell.isSaved = saved.contains(where: { $0.gifId == cell.gif.id })
+            if let saved = saved.first(where: { $0.gifId == cell.gif.id }) {
+                cell.gif.saved = saved
+                cell.isSaved = true
+            } else {
+                cell.isSaved = false
+            }
         }
     }
     
     func tapGif(_ index: Int) {
-        if let gif = cells[safeIndex: index]?.gif {
-            onGifTapped?(gif)
+        if let vm = cells[safeIndex: index] {
+            onGifTapped?(vm.gif)
         }
     }
     
     private func saveGif(_ gif: Gif) {
-        saveCancellable = filesService.saveImage(gif)
-            .flatMap { [unowned self] in
-                self.coreDataStore.publisher { context in
-                    let saved = SavedGif(context: context)
-                    saved.gifId = gif.id
-                    saved.width = gif.original?.width ?? 0
-                    saved.height = gif.original?.height ?? 0
+        if let saved = gif.saved {
+            saveCancellable = coreDataStore.publisher(delete: saved)
+                .replaceError(with: false)
+                .flatMap { [unowned self] _ in self.filesService.removeImage(id: gif.id) }
+                .subscribe(on: DispatchQueue.global(qos: .background))
+                .receive(on: DispatchQueue.main)
+                .sink { _ in }
+        } else {
+            saveCancellable = filesService.saveImage(gif)
+                .flatMap { [unowned self] in
+                    self.coreDataStore.publisher { context in
+                        let saved = SavedGif(context: context)
+                        saved.gifId = gif.id
+                        saved.width = gif.original?.width ?? 0
+                        saved.height = gif.original?.height ?? 0
+                    }
                 }
-            }
-            .replaceError(with: false)
-            .sink {_ in }
+                .replaceError(with: false)
+                .sink {_ in }
+        }
     }
 }

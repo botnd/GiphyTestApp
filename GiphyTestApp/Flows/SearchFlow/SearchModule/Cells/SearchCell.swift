@@ -10,7 +10,7 @@ import SnapKit
 import Combine
 
 class SearchCellVM {
-    let gif: Gif
+    var gif: Gif
     let onSaveTap: GifAction?
     
     @Published
@@ -103,7 +103,6 @@ extension SearchCell: CellConfigurable {
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 vm.onSaveTap?(vm.gif)
-//                self?.saveButton.setActive(true)
             }
         
         savedCancellable = vm.$isSaved
