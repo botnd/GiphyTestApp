@@ -9,9 +9,17 @@ import Kingfisher
 import SnapKit
 import Combine
 
-struct SearchCellVM {
+class SearchCellVM {
     let gif: Gif
     let onSaveTap: GifAction?
+    
+    @Published
+    var isSaved: Bool = false
+    
+    init(gif: Gif, onSaveTap: GifAction? = nil) {
+        self.gif = gif
+        self.onSaveTap = onSaveTap
+    }
 }
 
 class SearchCell: UICollectionViewCell, CellInterface {
@@ -30,6 +38,7 @@ class SearchCell: UICollectionViewCell, CellInterface {
     }()
     
     private var saveCancellable: AnyCancellable?
+    private var savedCancellable: AnyCancellable?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,12 +96,20 @@ extension SearchCell: CellConfigurable {
             ]
         )
         
+        saveButton.setActive(vm.isSaved)
+        
         saveCancellable = saveButton
             .publisher(for: .touchUpInside)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
+            .sink { _ in
                 vm.onSaveTap?(vm.gif)
-                self?.saveButton.setActive(true)
+//                self?.saveButton.setActive(true)
+            }
+        
+        savedCancellable = vm.$isSaved
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] saved in
+                self?.saveButton.setActive(saved)
             }
     }
 }

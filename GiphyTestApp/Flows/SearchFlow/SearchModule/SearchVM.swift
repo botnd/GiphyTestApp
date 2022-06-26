@@ -19,6 +19,7 @@ class SearchVM {
     private var gifsCancellable: AnyCancellable?
     private var searchCancellable: AnyCancellable?
     private var saveCancellable: AnyCancellable?
+    private var savedGifsCancellable: AnyCancellable?
     
     @Published
     private var cells: [SearchCellVM] = []
@@ -61,7 +62,15 @@ class SearchVM {
         }.sink { gifs in
             self.mapCells(gifs)
         }
-            
+        
+        let request = NSFetchRequest<SavedGif>(entityName: SavedGif.entity().name!)
+        savedGifsCancellable = coreDataStore.publisher(fetch: request)
+            .replaceError(with: [])
+            .combineLatest(task)
+            .subscribe(on: DispatchQueue.global(qos: .utility))
+            .sink { [weak self] savedGifs in
+                self?.updateCells(savedGifs.0)
+            }
     }
     
     private func mapCells(_ from: [Gif]) {
@@ -69,6 +78,12 @@ class SearchVM {
             SearchCellVM(gif: gif) { [weak self] gif in
                 self?.saveGif(gif)
             }
+        }
+    }
+    
+    private func updateCells(_ saved: [SavedGif]) {
+        cells.forEach { cell in
+            cell.isSaved = saved.contains(where: { $0.gifId == cell.gif.id })
         }
     }
     
