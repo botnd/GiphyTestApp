@@ -62,7 +62,11 @@ class TabBarCoordinator: BaseCoordinator {
                 coreDataStore: coreDataStore
             )
         case .saved:
-            coordinator = nil // TODO: set savedCoordinator
+            coordinator = SavedCoordinator(
+                router: navController,
+                coreDataStore: coreDataStore,
+                filesService: filesService
+            )
         }
         
         return coordinator

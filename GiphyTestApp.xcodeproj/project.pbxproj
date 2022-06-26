@@ -49,6 +49,11 @@
 		3AB068BC2867714E0078CA88 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB068BB2867714E0078CA88 /* ArrayExtensions.swift */; };
 		3AB068BF2867A01C0078CA88 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB068BE2867A01C0078CA88 /* SearchView.swift */; };
 		3AB068C12867A0540078CA88 /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB068C02867A0540078CA88 /* UITextFieldExtensions.swift */; };
+		3AC8468E2868AD140024D991 /* SavedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8468D2868AD140024D991 /* SavedCoordinator.swift */; };
+		3AC846912868B1EB0024D991 /* SavedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC846902868B1EB0024D991 /* SavedVC.swift */; };
+		3AC846932868B2030024D991 /* SavedVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC846922868B2030024D991 /* SavedVM.swift */; };
+		3AC846962868B5C70024D991 /* SavedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC846952868B5C70024D991 /* SavedCell.swift */; };
+		3AC846982868B7B90024D991 /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC846972868B7B90024D991 /* UITableViewExtensions.swift */; };
 		BFAA1DB2D99C614E77E5A86D /* Pods_GiphyTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7D268A2369B18BBEE901A /* Pods_GiphyTestApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +103,11 @@
 		3AB068BB2867714E0078CA88 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		3AB068BE2867A01C0078CA88 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		3AB068C02867A0540078CA88 /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
+		3AC8468D2868AD140024D991 /* SavedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCoordinator.swift; sourceTree = "<group>"; };
+		3AC846902868B1EB0024D991 /* SavedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedVC.swift; sourceTree = "<group>"; };
+		3AC846922868B2030024D991 /* SavedVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedVM.swift; sourceTree = "<group>"; };
+		3AC846952868B5C70024D991 /* SavedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCell.swift; sourceTree = "<group>"; };
+		3AC846972868B7B90024D991 /* UITableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
 		50D7D268A2369B18BBEE901A /* Pods_GiphyTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiphyTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82796A3E8DA12D2A5F274572 /* Pods-GiphyTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphyTestApp.debug.xcconfig"; path = "Target Support Files/Pods-GiphyTestApp/Pods-GiphyTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		B16BD800DE02EA213F689C38 /* Pods-GiphyTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphyTestApp.release.xcconfig"; path = "Target Support Files/Pods-GiphyTestApp/Pods-GiphyTestApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -204,6 +214,7 @@
 				3AB068BB2867714E0078CA88 /* ArrayExtensions.swift */,
 				3AB068C02867A0540078CA88 /* UITextFieldExtensions.swift */,
 				3A7311AC2867B9290019CCFE /* UIControlExtensions.swift */,
+				3AC846972868B7B90024D991 /* UITableViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -221,6 +232,7 @@
 		3AB068982865F3040078CA88 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				3AC8468C2868ACFE0024D991 /* SavedFlow */,
 				3AB0689E286637690078CA88 /* SearchFlow */,
 				3AB068992865F30D0078CA88 /* TabBarFlow */,
 			);
@@ -310,6 +322,33 @@
 				3A7311AA2867A6C50019CCFE /* GifViewVM.swift */,
 			);
 			path = GifViewModule;
+			sourceTree = "<group>";
+		};
+		3AC8468C2868ACFE0024D991 /* SavedFlow */ = {
+			isa = PBXGroup;
+			children = (
+				3AC8468D2868AD140024D991 /* SavedCoordinator.swift */,
+				3AC8468F2868B1DE0024D991 /* SavedModule */,
+			);
+			path = SavedFlow;
+			sourceTree = "<group>";
+		};
+		3AC8468F2868B1DE0024D991 /* SavedModule */ = {
+			isa = PBXGroup;
+			children = (
+				3AC846942868B5BC0024D991 /* Cells */,
+				3AC846902868B1EB0024D991 /* SavedVC.swift */,
+				3AC846922868B2030024D991 /* SavedVM.swift */,
+			);
+			path = SavedModule;
+			sourceTree = "<group>";
+		};
+		3AC846942868B5BC0024D991 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3AC846952868B5C70024D991 /* SavedCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		6915B8BF2FD33CA5B1A699D2 /* Frameworks */ = {
@@ -475,6 +514,8 @@
 				3A7311B62867BBB70019CCFE /* CoreDataFetchPublisher.swift in Sources */,
 				3AB068B3286756C20078CA88 /* GiphyAPI.swift in Sources */,
 				3A7311BE2867C0A20019CCFE /* FilesService.swift in Sources */,
+				3AC846932868B2030024D991 /* SavedVM.swift in Sources */,
+				3AC8468E2868AD140024D991 /* SavedCoordinator.swift in Sources */,
 				3AB068B62867579E0078CA88 /* Gif.swift in Sources */,
 				3AB068AE28663E9B0078CA88 /* CellConfigurable.swift in Sources */,
 				3A7311AF2867BA360019CCFE /* SavedGif.swift in Sources */,
@@ -485,7 +526,9 @@
 				3AB068C12867A0540078CA88 /* UITextFieldExtensions.swift in Sources */,
 				3AB068B8286757DD0078CA88 /* Image.swift in Sources */,
 				3AB068BF2867A01C0078CA88 /* SearchView.swift in Sources */,
+				3AC846912868B1EB0024D991 /* SavedVC.swift in Sources */,
 				3A7311AD2867B9290019CCFE /* UIControlExtensions.swift in Sources */,
+				3AC846982868B7B90024D991 /* UITableViewExtensions.swift in Sources */,
 				3AB068912865ED4E0078CA88 /* BaseVC.swift in Sources */,
 				3AB068A5286637D20078CA88 /* SearchVM.swift in Sources */,
 				3AB068A3286637CA0078CA88 /* SearchVC.swift in Sources */,
@@ -494,6 +537,7 @@
 				3A7311B82867BBD60019CCFE /* CoreDataDeletePublisher.swift in Sources */,
 				3AB068AC28663E2E0078CA88 /* CellInterface.swift in Sources */,
 				3AB0689B2865F31D0078CA88 /* TabBarCoordinator.swift in Sources */,
+				3AC846962868B5C70024D991 /* SavedCell.swift in Sources */,
 				3A7311C32867D0870019CCFE /* FileDeletePublisher.swift in Sources */,
 				3AB068942865EDA90078CA88 /* NSObjectExtensions.swift in Sources */,
 				3A7311AB2867A6C50019CCFE /* GifViewVM.swift in Sources */,
