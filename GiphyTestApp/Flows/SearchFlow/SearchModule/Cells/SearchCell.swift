@@ -7,12 +7,17 @@
 
 import Kingfisher
 import SnapKit
+import Combine
 
 struct SearchCellVM {
     let gif: Gif
+    let onSaveTap: GifAction?
 }
 
 class SearchCell: UICollectionViewCell, CellInterface {
+    private let saveImage = UIImage(systemName: "arrow.down.circle")
+    private let removeImage = UIImage(systemName: "arrow.down.circle.fill")
+    
     private lazy var imageView: UIImageView = {
         let v = UIImageView()
         v.contentMode = .scaleAspectFill
@@ -20,6 +25,14 @@ class SearchCell: UICollectionViewCell, CellInterface {
         v.clipsToBounds = true
         return v
     }()
+    
+    private lazy var saveButton: UIButton = {
+        let v = UIButton()
+        v.setImage(saveImage, for: .normal)
+        return v
+    }()
+    
+    private var saveCancellable: AnyCancellable?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,6 +52,7 @@ class SearchCell: UICollectionViewCell, CellInterface {
     
     private func setupUI() {
         contentView.addSubview(imageView)
+        contentView.addSubview(saveButton)
         
         setupConstraints()
     }
@@ -47,6 +61,18 @@ class SearchCell: UICollectionViewCell, CellInterface {
         imageView.snp.makeConstraints { make in
             make.leading.top.trailing.bottom
                 .equalToSuperview()
+        }
+        
+        saveButton.snp.makeConstraints { make in
+            make.width.height.equalTo(30)
+            
+            make.top
+                .equalToSuperview()
+                .offset(10)
+            
+            make.trailing
+                .equalToSuperview()
+                .offset(-10)
         }
     }
 }
@@ -63,5 +89,12 @@ extension SearchCell: CellConfigurable {
                 .transition(.fade(1))
             ]
         )
+        
+        saveCancellable = saveButton
+            .publisher(for: .touchUpInside)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                vm.onSaveTap?(vm.gif)
+            }
     }
 }

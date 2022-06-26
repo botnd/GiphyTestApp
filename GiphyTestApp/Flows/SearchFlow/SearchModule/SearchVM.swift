@@ -13,9 +13,12 @@ class SearchVM {
     var onGifTapped: GifAction?
     
     private let api: GiphyAPI
+    private let filesService: FilesService
+    private let coreDataStore: CoreDataStore
 
     private var gifsCancellable: AnyCancellable?
     private var searchCancellable: AnyCancellable?
+    private var saveCancellable: AnyCancellable?
     
     @Published
     private var cells: [SearchCellVM] = []
@@ -28,8 +31,10 @@ class SearchVM {
     @Published
     var searchQuery: String?
     
-    init(api: GiphyAPI) {
+    init(api: GiphyAPI, filesService: FilesService, coreDataStore: CoreDataStore) {
         self.api = api
+        self.filesService = filesService
+        self.coreDataStore = coreDataStore
         
         loadData()
         
@@ -61,7 +66,9 @@ class SearchVM {
     
     private func mapCells(_ from: [Gif]) {
         cells = from.map { gif in
-            SearchCellVM(gif: gif)
+            SearchCellVM(gif: gif) { [weak self] gif in
+                self?.saveGif(gif)
+            }
         }
     }
     
@@ -69,5 +76,19 @@ class SearchVM {
         if let gif = cells[safeIndex: index]?.gif {
             onGifTapped?(gif)
         }
+    }
+    
+    private func saveGif(_ gif: Gif) {
+        saveCancellable = filesService.saveImage(gif)
+            .flatMap { [unowned self] in
+                self.coreDataStore.publisher { context in
+                    let saved = SavedGif(context: context)
+                    saved.gifId = gif.id
+                    saved.width = gif.original?.width ?? 0
+                    saved.height = gif.original?.height ?? 0
+                }
+            }
+            .replaceError(with: false)
+            .sink {_ in }
     }
 }

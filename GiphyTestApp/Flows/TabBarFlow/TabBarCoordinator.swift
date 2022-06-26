@@ -11,10 +11,14 @@ class TabBarCoordinator: BaseCoordinator {
     private var tabBarView: TabBarVC!
     private let router: Router
     private let giphyAPI: GiphyAPI
+    private let filesService: FilesService
+    private let coreDataStore: CoreDataStore
     
-    init(router: Router, giphyAPI: GiphyAPI) {
+    init(router: Router, giphyAPI: GiphyAPI, filesService: FilesService, coreDataStore: CoreDataStore) {
         self.router = router
         self.giphyAPI = giphyAPI
+        self.filesService = filesService
+        self.coreDataStore = coreDataStore
     }
     
     override func start() {
@@ -51,7 +55,12 @@ class TabBarCoordinator: BaseCoordinator {
         var coordinator: Coordinatable!
         switch itemType {
         case .search:
-            coordinator = SearchCoordinator(router: navController, api: giphyAPI)
+            coordinator = SearchCoordinator(
+                router: navController,
+                api: giphyAPI,
+                filesService: filesService,
+                coreDataStore: coreDataStore
+            )
         case .saved:
             coordinator = nil // TODO: set savedCoordinator
         }
