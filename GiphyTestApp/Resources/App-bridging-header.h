@@ -8,3 +8,4 @@
 @import UIKit;
 @import Foundation;
 @import SnapKit;
+@import CoreData;
