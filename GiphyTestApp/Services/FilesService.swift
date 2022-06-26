@@ -19,8 +19,6 @@ class FilesServiceDefaultImpl: FilesService {
             return Just(()).eraseToAnyPublisher()
         }
         
-        print(localURL(for: gif.id))
-        
         return FileSavePublisher(from: url, to: localURL(for: gif.id))
             .replaceError(with: ())
             .eraseToAnyPublisher()
