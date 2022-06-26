@@ -8,6 +8,8 @@
 import Combine
 import Kingfisher
 
+/// Implementation for Combine's Publisher protocol that performs file saving
+/// from the given``FileSavePublisher/from`` URL, to the given ``FileSavePublisher/to`` URL
 struct FileSavePublisher: Publisher {
     typealias Output = Void
     typealias Failure = Error

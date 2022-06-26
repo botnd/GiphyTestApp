@@ -7,6 +7,8 @@
 
 import Combine
 
+/// Implementation for Combine's Publisher protocol that performs file reading
+/// from the given URL
 struct FileReadPublisher: Publisher {
     typealias Output = Data
     typealias Failure = Error

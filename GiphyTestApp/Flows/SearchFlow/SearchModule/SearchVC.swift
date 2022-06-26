@@ -5,6 +5,9 @@
 //  Created by Dmitri Isakov on 24.06.2022.
 //
 
+/// ViewController class that shows trending or searched GIFs in a UICollectionView
+///
+/// - Warning: Need to set ``SearchVC/viewModel`` property before presenting the viewController, otherwise the app will crash
 class SearchVC: BaseVC {
     var viewModel: SearchVM!
     

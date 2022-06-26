@@ -8,8 +8,11 @@
 import Kingfisher
 import Combine
 
+/// ViewModel struct passed to ``SavedCell``'s ``SavedCell/configure(with:)`` method
 struct SavedCellVM {
+    /// ``SavedGif`` object passed to the cell
     let gif: SavedGif
+    /// Closure that handles tap on Favourite button
     let onSavedTap: SavedGifAction?
 }
 
@@ -72,6 +75,10 @@ class SavedCell: UITableViewCell, CellInterface {
                 .equalToSuperview()
                 .offset(-10)
         }
+    }
+    
+    override func prepareForReuse() {
+        gifImageView.image = nil
     }
 }
 

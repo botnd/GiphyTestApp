@@ -6,6 +6,9 @@
 //
 
 class SavedGif: NSManagedObject {
+    /// Path to gif image saved locally
+    ///
+    /// Gifs are stored in documentDirectory, in userDomain
     var pathURL: URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             .appendingPathComponent(gifId ?? "")

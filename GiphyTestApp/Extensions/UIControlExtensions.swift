@@ -8,7 +8,7 @@
 import Combine
 
 extension UIControl {
-    class InteractionSubscription<S: Subscriber>: Subscription where S.Input == Void {
+    private class InteractionSubscription<S: Subscriber>: Subscription where S.Input == Void {
         private let subscriber: S?
         private let control: UIControl
         private let event: UIControl.Event
@@ -52,6 +52,7 @@ extension UIControl {
         }
     }
     
+    /// Combine publisher for UIControl.Event types
     func publisher(for event: UIControl.Event) -> UIControl.InteractionPublisher {
         return InteractionPublisher(control: self, event: event)
     }

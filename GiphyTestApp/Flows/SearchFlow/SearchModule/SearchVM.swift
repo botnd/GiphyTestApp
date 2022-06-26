@@ -8,6 +8,7 @@
 import Combine
 import Kingfisher
 
+/// ViewModel class for ``SearchVC`` viewController
 class SearchVM {
     
     var onGifTapped: GifAction?
@@ -45,6 +46,19 @@ class SearchVM {
         }
     }
     
+    /// Performs network request to Giphy API
+    ///
+    /// Uses ``GiphyAPI`` for these requests
+    ///
+    /// Will call ``GiphyAPI/loadTrending(offset:count:)`` if query parameter is nil
+    ///
+    /// - Parameter query: Optional String parameter containing search query,
+    /// ``GiphyAPI/loadSearch(_:offset:count:)`` method will be called if this is not nil
+    ///
+    /// Calls ``mapCells`` method after receiving data
+    ///
+    /// Also performs a call to ``CoreDataStore`` ``CoreDataStore/publisher(fetch:)-26rwq`` method to
+    /// load previously saved GIFs in order to update cells to show which ones have already been favourited
     private func loadData(for query: String? = nil) {
         gifsCancellable?.cancel()
         
@@ -73,6 +87,11 @@ class SearchVM {
             }
     }
     
+    /// Creates ``SearchCellVM`` viewModels from input
+    ///
+    /// - Parameter gifs: array of ``Gif``
+    ///
+    /// also sets up handling of ``SaveButton`` tap in ``SearchCell``
     private func mapCells(_ from: [Gif]) {
         cells = from.map { gif in
             SearchCellVM(gif: gif) { [weak self] gif in
@@ -81,6 +100,10 @@ class SearchVM {
         }
     }
     
+    /// Sets ``Gif/saved`` property on ``Gif`` objects and ``SearchCellVM/isSaved`` property in cells viewModels
+    /// after fetching GIFs stored in CoreData, so that previously stored GIFs can be properly indicated
+    ///
+    /// - Parameter saved: array of ``SavedGif`` objects
     private func updateCells(_ saved: [SavedGif]) {
         cells.forEach { cell in
             if let saved = saved.first(where: { $0.gifId == cell.gif.id }) {
@@ -92,12 +115,28 @@ class SearchVM {
         }
     }
     
+    /// Handler for tapping on GIF
+    ///
+    /// will call ``SearchVM/onGifTapped`` closure resulting in ``SearchCoordinator`` showing this GIF fullscreen
+    ///
+    /// - Parameter index: Integer of tapped GIF
     func tapGif(_ index: Int) {
         if let vm = cells[safeIndex: index] {
             onGifTapped?(vm.gif)
         }
     }
     
+    
+    /// Calls for saving or removal of ``Gif``
+    ///
+    /// If ``Gif/saved`` property is not nil ``SavedGif`` will be removed
+    /// Utilizes ``FilesService`` ``FilesService/removeImage(id:)`` and ``CoreDataStore`` ``CoreDataStore/publisher(delete:)-5ej8a``
+    /// methods
+    ///
+    /// In the other case ``FilesService`` ``FilesService/saveImage(_:)`` and ``CoreDataStore`` ``CoreDataStore/publisher(save:)-9h5n8``
+    /// methods will be called to store GIF locally
+    ///
+    /// - Parameter gif: ``Gif`` to be saved
     private func saveGif(_ gif: Gif) {
         if let saved = gif.saved {
             saveCancellable = coreDataStore.publisher(delete: saved)

@@ -7,8 +7,11 @@
 
 import Combine
 
+/// UIView containing UISearchBar
+/// and an AnyPublisher ``searchPublisher`` property that can be observed for new value
 class SearchView: UIView {
     
+    /// Combine publisher property wrapping textPublisher with one second debounce
     var searchPublisher: AnyPublisher<String?, Never> {
         searchBar.searchTextField.textPublisher
             .debounce(for: .seconds(1), scheduler: DispatchQueue.main)

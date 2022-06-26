@@ -7,6 +7,8 @@
 
 import Combine
 
+/// Implementation for Combine's Publisher protocol that performs fetching from CoreData database
+/// calls delete on provided NSManagedObjectContext and passes given entity to it
 struct CoreDataDeletePublisher<Entity: NSManagedObject>: Publisher {
     typealias Output = Bool
     typealias Failure = Error

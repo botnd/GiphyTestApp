@@ -5,6 +5,7 @@
 //  Created by Dmitri Isakov on 26.06.2022.
 //
 
+/// Coordinator class responsible for content of the `Saved` tab
 class SavedCoordinator: BaseCoordinator {
     private let router: Router
     private let coreDataStore: CoreDataStore
@@ -20,6 +21,9 @@ class SavedCoordinator: BaseCoordinator {
         showSavedModule()
     }
     
+    /// Shows initial screen containing ``SavedVC`` viewController
+    ///
+    /// Displays previously saved GIFs in UITableView
     private func showSavedModule() {
         let vc = SavedVC()
         let vm = SavedVM(

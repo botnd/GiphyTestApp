@@ -9,6 +9,9 @@ import UIKit
 
 typealias Router = UINavigationController
 
+/// Main application Coordinator class
+///
+/// Initializes and sets up ``TabBarCoordinator`` and all of it's dependencies
 class ApplicationCoordinator: BaseCoordinator {
     private let router: Router
     private let giphyAPI: GiphyAPI = GiphyApiDefaultImpl()

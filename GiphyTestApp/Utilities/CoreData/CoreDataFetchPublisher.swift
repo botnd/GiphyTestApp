@@ -7,6 +7,8 @@
 
 import Combine
 
+/// Implementation for Combine's Publisher protocol that performs fetching from CoreData database
+/// performs given NSFetchRequest within provided NSManagedObjectContext and emits fetchedObjects
 struct CoreDataFetchPublisher<Entity>: Publisher where Entity: NSManagedObject {
     typealias Output = [Entity]
     typealias Failure = Error

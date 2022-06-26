@@ -12,7 +12,10 @@ enum TabBarItemType: Int {
     case saved = 1
 }
 
+/// Implementation of UITabBarController for CoordinatorFlow
 final class TabBarVC: UITabBarController {
+    /// Closure, called when ```tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController)```
+    /// is invoked
     var onFlow: ((UINavigationController, TabBarItemType) -> Void)?
     var onViewDidLoad: ((UINavigationController) -> Void)?
     
@@ -30,6 +33,10 @@ final class TabBarVC: UITabBarController {
         }
     }
     
+    
+    /// Set up root UINavigationControllers with their respective UITabBarItems
+    ///
+    /// Also does basic theming setup
     private func setupUI() {
         let tabs = [UITabBarItem(), UITabBarItem()]
         let tabVCs = [UINavigationController(), UINavigationController()]
@@ -58,12 +65,6 @@ final class TabBarVC: UITabBarController {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .white
         tabBar.standardAppearance = appearance
-    }
-    
-    func updateTabBarItem(with item: TabBarItemType) {
-        guard let controller = viewControllers?[item.rawValue] as? UINavigationController else {return}
-        selectedIndex = item.rawValue
-        onFlow?(controller, item)
     }
 }
 

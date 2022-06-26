@@ -7,6 +7,8 @@
 
 import Combine
 
+/// Implementation for Combine's Publisher protocol that performs file deleting
+/// for the given URL
 struct FileDeletePublisher: Publisher {
     typealias Output = Bool
     typealias Failure = Error

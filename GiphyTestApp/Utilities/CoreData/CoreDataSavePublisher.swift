@@ -7,6 +7,8 @@
 
 import Combine
 
+/// Implementation for Combine's Publisher protocol that performs saving to CoreData database
+/// performs given closure within provided NSManagedObjectContext and calls save() method on the context
 struct CoreDataSavePublisher: Publisher {
     typealias Output = Bool
     typealias Failure = Error

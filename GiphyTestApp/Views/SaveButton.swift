@@ -28,6 +28,8 @@ class SaveButton: UIButton {
         setActive(false)
     }
     
+    /// Changes icon of the button
+    /// - Parameter value: Bool value - true if button should be filled, otherwise false
     func setActive(_ value: Bool) {
         setImage(
             UIImage(systemName: value ? "heart.fill" : "heart")?

@@ -9,10 +9,14 @@ import Kingfisher
 import SnapKit
 import Combine
 
+/// ViewModel class passed to ``SearchCell``'s ``SearchCell/configure(with:)`` method
 class SearchCellVM {
+    /// ``Gif`` object passed to the cell
     var gif: Gif
+    /// Closure that handles tap on Favourite button
     let onSaveTap: GifAction?
     
+    /// Property indicates Favourite button's state
     @Published
     var isSaved: Bool = false
     

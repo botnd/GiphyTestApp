@@ -5,6 +5,9 @@
 //  Created by Dmitri Isakov on 26.06.2022.
 //
 
+/// ViewController class that shows previously saved GIFs in a UITableView
+///
+/// - Warning: Need to set ``SavedVC/viewModel`` property before presenting the viewController, otherwise the app will crash
 class SavedVC: BaseVC {
     var viewModel: SavedVM!
     

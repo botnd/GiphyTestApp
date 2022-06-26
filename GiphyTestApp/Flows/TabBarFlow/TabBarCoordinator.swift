@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Coordinator responsible for handling the root TabBar presentation of the app
 class TabBarCoordinator: BaseCoordinator {
     private var tabBarView: TabBarVC!
     private let router: Router
@@ -21,6 +22,7 @@ class TabBarCoordinator: BaseCoordinator {
         self.coreDataStore = coreDataStore
     }
     
+    /// Set up ``TabBarVC`` viewController, set closure for ``TabBarVC/onFlow`` to handle tabs switching
     override func start() {
         tabBarView = TabBarVC()
         tabBarView.onFlow = { [weak self] navController, itemType in
@@ -32,6 +34,12 @@ class TabBarCoordinator: BaseCoordinator {
         runItemFlow(navController: tabBarView.viewControllers?.first as? UINavigationController, itemType: .search)
     }
     
+    /// Method that sets up Coordinator for the needed flow
+    ///
+    /// See makeTabBarCoordinatorItem for more info
+    ///
+    /// - Parameter navController: UINavigationController, root controller for the given tab
+    /// - Parameter itemType: ``TabBarItemType`` case for the given tab
     private func runItemFlow(navController: UINavigationController?, itemType: TabBarItemType) {
         guard let navController = navController else {
             return
@@ -50,7 +58,13 @@ class TabBarCoordinator: BaseCoordinator {
             self.addDependency(itemCoordinator)
         }
     }
-    
+        
+    /// Creates Coordinator object for the given tab
+    ///
+    /// - Parameter navController: UINavigationController root controller for the given tab
+    /// - Parameter itemType: ``TabBarItemType`` case for the given tab
+    ///
+    /// - Returns: ``Coordinatable`` instance, in our case it's either ``SearchCoordinator`` or ``SavedCoordinator``
     private func makeTabBarCoordinatorItem(navController: UINavigationController, itemType: TabBarItemType) -> Coordinatable {
         var coordinator: Coordinatable!
         switch itemType {
